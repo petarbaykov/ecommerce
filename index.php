@@ -3,7 +3,8 @@
 /* 
  * Front Controller Page. All requests will be directed to this file
  */
-
+require "helpers.php";
+$config = require "config/config.php";
 
 $url = explode("/",$_SERVER['REQUEST_URI']);
 
@@ -26,12 +27,41 @@ spl_autoload_register(function($class) {
     $splitted = explode("\\", $class);
     array_shift($splitted);
     $fullClass = implode(DIRECTORY_SEPARATOR, $splitted);
-    include $fullClass . '.php';
+    
+    if(!$fullClass) {
+        throw new \Exception ("No such class");
+        
+    }
+    
+    $path = $fullClass . '.php';
+    if($path != FALSE && is_readable($path) && file_exists($path) ){
+        include $fullClass . '.php';
+    }else {
+        throw new \Exception ("No such file");
+    }
+    
 });
 
+/*use Ecommerce\App\DB;
+$Db = new DB;
+$Db = $Db->connect();
+*/
+try {
+    $controllerName = "\\Ecommerce\\Controllers\\" . ucfirst($className) . "Controller";
 
-$controllerName = "\\Ecommerce\\Controllers\\" . ucfirst($className) . "Controller";
+    $controller = new $controllerName();
 
-$controller = new $controllerName();
-
-call_user_func_array(array($controllerName,$methodName), $url);
+    
+    
+    call_user_func_array(array(new $controllerName,$methodName), $url);
+    /*$controller->$methodName($url);*/
+} catch (Exception $ex) {
+    
+    if($config["debug"]) {
+        pretty_log($ex);
+    }else {
+       $error = new Ecommerce\Controllers\ErrorController();
+       $error->index();
+    }
+    
+}
