@@ -11,7 +11,7 @@ namespace Ecommerce\Models;
 
 class BaseModel {
     
-    public  $db = null;
+    public $db = null;
     public $table = null;
     public function __construct($table) {
        
