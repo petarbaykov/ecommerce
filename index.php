@@ -3,9 +3,9 @@
 /* 
  * Front Controller Page. All requests will be directed to this file
  */
-require "helpers.php";
-$config = require "config/config.php";
 
+$config = require "config/config.php";
+require "helpers.php";
 $url = explode("/",$_SERVER['REQUEST_URI']);
 
 array_shift($url);
@@ -46,6 +46,14 @@ spl_autoload_register(function($class) {
 $Db = new DB;
 $Db = $Db->connect();
 */
+use Ecommerce\App\Session;
+Session::start();
+
+\Ecommerce\App\CSRFToken::set();
+
+
+
+
 try {
     $controllerName = "\\Ecommerce\\Controllers\\" . ucfirst($className) . "Controller";
 

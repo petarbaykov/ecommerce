@@ -23,13 +23,15 @@ class HomeController extends Controller {
     function index () {
        $request = new Request;
        $request = $request->all();
-       var_dump($request);
+       
        $products = new Products;
        
        
        $one = $products->find(1);
        
-       return $this->view("home/home");
+       var_dump($one);
+       
+       return $this->view("home/home",["data" =>"5"]);
        
     }
     

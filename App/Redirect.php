@@ -11,7 +11,8 @@ namespace Ecommerce\App;
 class Redirect {
     
     public static function to ($path) {
-        header ("Location: " . $_SERVER['HTTP_REFERER'] . $path); 
+        $config = require 'config/config.php';
+        header ("Location: " . $config['app_url'] . $path); 
         exit();
     }
 }

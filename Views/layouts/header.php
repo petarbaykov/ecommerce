@@ -1,0 +1,10 @@
+<html>
+    <head> 
+        <link rel="stylesheet" href="<?= asset('assets/css/bootstrap-custom.css'); ?>" />
+        
+        <link rel="stylesheet" href="<?= asset('assets/css/uikit.css'); ?>" />
+        <link rel="stylesheet" href="<?= asset('assets/css/responsive.css'); ?>" />
+    </head>
+    <body> 
+        
+        

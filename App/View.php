@@ -7,7 +7,7 @@
  */
 
 namespace Ecommerce\App;
-
+use Ecommerce\App\Session;
 class View {
     
     public function render ($view,$params = []) {

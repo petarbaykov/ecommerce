@@ -14,6 +14,7 @@ return [
     "env"=>"local",
     "db_name"=>"ecommerce",
     "db_user"=>"root",
-    "db_password"=>""
+    "db_password"=>"",
+    "app_url"=>"http://localhost/ecommerce/"
     
 ];
