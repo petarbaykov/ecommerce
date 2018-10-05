@@ -35,4 +35,28 @@ class BaseModel {
         $stmt = $stmt->fetch();
         return $stmt;
     }
+    
+    public function insert($data) {
+        $columns = "";
+        $values = [];
+        $placeholders = "";
+        $counter = 0;
+       
+        // INSERT INTO table (email,name) VALUES ('a','2');
+        foreach($data  as $key=>$value) {
+            $columns .= $key ;
+            array_push($values,$value);
+            $placeholders .= "?";
+            if(count($data) - 1  != $counter) {
+                $columns .= ",";
+               
+                $placeholders .= ",";
+            }
+            
+            $counter++;
+        } 
+        
+        $stmt = $this->db->prepare("INSERT INTO $this->table ( $columns) VALUES ($placeholders)");
+        $stmt->execute($values);
+    }
 }

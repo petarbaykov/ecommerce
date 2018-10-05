@@ -23,4 +23,10 @@ class User extends BaseModel {
         $stmt->execute([$email]);
         return $stmt->fetch();
     }
-}
+    
+    public function insert($data) {
+        unset($data['_token']);
+        $data['password'] = md5($data['password']);
+        parent::insert($data);
+    }
+} 

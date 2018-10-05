@@ -25,7 +25,7 @@ class DB {
     
     public function connect() {
         
-        self::$connection = new PDO("mysql:host=localhost;dbname=".self::$config['db_name'],self::$config["db_user"],self::$config["db_password"]);
+        self::$connection = new PDO("mysql:host=localhost;dbname=".self::$config['db_name'].';charset=utf8',self::$config["db_user"],self::$config["db_password"]);
    
     
         self::$connection->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);

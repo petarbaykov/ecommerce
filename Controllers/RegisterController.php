@@ -41,17 +41,29 @@ class RegisterController extends Controller {
             'name'=>'required',
             'password'=>'required|min:6'
         ]);
-        if($validator->validate()){
-            echo "valid";
+        if($validator->validate('register')){
+            $user = new User;
+            $checkUser = $user->findByEmail($request['email']);
+           
+            
+            
+            
+            if($checkUser) {
+                Session::set('register',trans('register.user_exists'));
+                return Redirect::to("register");
+            }
+            
+            
+            $user->insert($request);
+            
         }else{
-            echo "invalid";
-            echo $validator->wrongField;
+            Session::set('register',trans($validator->wrongField));
+            return Redirect::to("register");
         }
-        exit;
+       
          
          
-        $user = new User;
-        $user = $user->findByEmail($request['email']);
+        
         
        
         
@@ -60,6 +72,6 @@ class RegisterController extends Controller {
         
         
         
-        Redirect::to("register");
+        Redirect::to("profile");
     }
 }

@@ -23,3 +23,11 @@ function asset($url) {
     return $config["app_url"] . $url;
 }
  
+
+
+function trans ($key) {
+    $key = explode(".",$key);
+    $trans = require 'lang/' . $_SESSION["locale"] . '/'. $key[0] . '.php' ;
+    
+    return $trans[$key[1]];
+}

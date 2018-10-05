@@ -27,7 +27,7 @@ class Validation {
        
     }
     
-    public function validate( ) {
+    public function validate( $trans) {
         $counter = 0;
         $result = true;
         foreach($this->rules as $key=>$value) {
@@ -43,7 +43,7 @@ class Validation {
                            
                            if(!$this->required($this->data[$key])) {
                                $result = false;
-                               $this->wrongField = $key . ".required";
+                               $this->wrongField = $trans . '.' .$key . "_required";
                                break;
                                
                                
@@ -54,7 +54,7 @@ class Validation {
                            
                             if(!$this->email($this->data[$key])) {
                                 $result = false;
-                                $this->wrongField = $key . ".email";
+                                $this->wrongField = $trans . '.' .$key . "_email";
                                 break;
                                 
                             }
@@ -66,7 +66,7 @@ class Validation {
                             if(!$this->min($this->data[$key],$param_arr[1])) {
                                 
                                 $result = false;
-                                 $this->wrongField = $key . ".min";
+                                $this->wrongField = $trans . '.' .$key . "_min";
                                 break;
                                 
                                
