@@ -50,8 +50,17 @@ class LoginController extends Controller {
             if($checkUser) {
                if($checkUser['password'] == md5($request['password'])) {
                    Session::set('user',$checkUser['id']);
+                   if($checkUser['role'] == 'admin') {
+                       return Redirect::to('admin');
+                   }
                    return Redirect::to('profile');
+               }else{
+                   Session::set('login',trans('login.wrong'));
+                   return Redirect::to('login');
                }
+            }else {
+                Session::set('login',trans('login.wrong'));
+                return Redirect::to('login');
             }
             
             

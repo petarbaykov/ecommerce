@@ -18,8 +18,15 @@ class Controller {
 
     public function auth() {
         if(!user()) {
-            Redirect::to('login');
+            return Redirect::to('login');
         }
+    }
+    
+    public function admin() {
+        if(user() && user()['role'] != 'admin'){
+            return Redirect::to('');
+        }
+        
     }
     
     public function view($name,$params = []) {

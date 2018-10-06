@@ -37,3 +37,20 @@ function trans ($key) {
 function user() {
     return \Ecommerce\App\Auth::user();
 }
+
+
+function sessionSet() {
+    
+}
+
+function session($key) {
+    return \Ecommerce\App\Session::get($key);
+}
+
+function sessionFlash($key){
+    return \Ecommerce\App\Session::flash($key);
+}
+
+function sessionHas($key) {
+    return \Ecommerce\App\Session::has($key);
+} 
