@@ -27,6 +27,6 @@ class User extends BaseModel {
     public function insert($data) {
         unset($data['_token']);
         $data['password'] = md5($data['password']);
-        parent::insert($data);
+        return parent::insert($data);
     }
 } 

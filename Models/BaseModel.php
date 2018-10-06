@@ -58,5 +58,7 @@ class BaseModel {
         
         $stmt = $this->db->prepare("INSERT INTO $this->table ( $columns) VALUES ($placeholders)");
         $stmt->execute($values);
+        
+        return $this->db->lastInsertId();
     }
 }

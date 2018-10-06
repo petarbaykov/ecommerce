@@ -7,7 +7,7 @@
 namespace Ecommerce\Controllers;
 
 use Ecommerce\App\View;
-
+use Ecommerce\App\Redirect;
 class Controller {
     
     
@@ -16,6 +16,12 @@ class Controller {
     }
     
 
+    public function auth() {
+        if(!user()) {
+            Redirect::to('login');
+        }
+    }
+    
     public function view($name,$params = []) {
         $view = new View ();
         

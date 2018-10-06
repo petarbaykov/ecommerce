@@ -6,6 +6,7 @@
  * and open the template in the editor.
  */
 
+
 function pretty_log ($data) {
     echo "<pre>";
     print_r($data);
@@ -30,4 +31,9 @@ function trans ($key) {
     $trans = require 'lang/' . $_SESSION["locale"] . '/'. $key[0] . '.php' ;
     
     return $trans[$key[1]];
+}
+
+
+function user() {
+    return \Ecommerce\App\Auth::user();
 }

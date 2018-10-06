@@ -46,12 +46,11 @@ spl_autoload_register(function($class) {
 $Db = new DB;
 $Db = $Db->connect();
 */
+
 use Ecommerce\App\Session;
 Session::start();
 $_SESSION['locale'] = "bg";
 \Ecommerce\App\CSRFToken::set();
-
-
 
 
 try {

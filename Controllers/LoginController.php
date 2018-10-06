@@ -1,7 +1,7 @@
 <?php
 
 /* 
- * Register Controller
+ * Login Controller
  * 
  */
 
@@ -15,11 +15,11 @@ use Ecommerce\App\Session;
 use Ecommerce\Models\User;
 use Ecommerce\App\Validation;
 
-class RegisterController extends Controller {
+class LoginController extends Controller {
     
     public function index () {
        
-        return $this->view('auth/register');
+        return $this->view('auth/login');
         
     }
     
@@ -38,10 +38,9 @@ class RegisterController extends Controller {
         $validator = new Validation();
         $validator->create($request, [
             'email'=>'required|email',
-            'name'=>'required',
             'password'=>'required|min:6'
         ]);
-        if($validator->validate('register')){
+        if($validator->validate('login')){
             $user = new User;
             $checkUser = $user->findByEmail($request['email']);
            
@@ -49,20 +48,20 @@ class RegisterController extends Controller {
             
             
             if($checkUser) {
-                Session::set('register',trans('register.user_exists'));
-                return Redirect::to("register");
+               if($checkUser['password'] == md5($request['password'])) {
+                   Session::set('user',$checkUser['id']);
+                   return Redirect::to('profile');
+               }
             }
             
             
-            $userId = $user->insert($request);
+           
             
-            Session::set('user',$userId);
             
-            return Redirect::to('profile');
             
         }else{
-            Session::set('register',trans($validator->wrongField));
-            return Redirect::to("register");
+            Session::set('login',trans($validator->wrongField));
+            return Redirect::to("login");
         }
        
          
@@ -78,4 +77,5 @@ class RegisterController extends Controller {
         
         Redirect::to("profile");
     }
+    
 }
