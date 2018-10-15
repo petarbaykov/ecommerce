@@ -20,5 +20,10 @@ class Products extends BaseModel {
         parent::__construct($this->table);
     }
     
+    
+    public function insert($data) {
+        unset($data['_token']);
+        return parent::insert($data);
+    }
    
 }

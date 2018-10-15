@@ -24,4 +24,16 @@ class Request {
             return $_POST;
         }
     }
+    
+    public function file($name){
+       return $_FILES[$name];
+    }
+    
+    public  function hasFile($file){
+        if(isset($_FILES[$file])){   
+            return true;
+        }
+        return false;
+    }
+    
 }

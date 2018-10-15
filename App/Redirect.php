@@ -15,4 +15,10 @@ class Redirect {
         header ("Location: " . $config['app_url'] . $path); 
         exit();
     }
+    
+    
+    public function back() {
+        header("location:javascript://history.go(-1)");
+        exit;
+    }
 }

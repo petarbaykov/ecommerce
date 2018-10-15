@@ -54,3 +54,9 @@ function sessionFlash($key){
 function sessionHas($key) {
     return \Ecommerce\App\Session::has($key);
 } 
+
+
+function url ($url) {
+    $config = require 'config/config.php';
+    return $config['app_url'] . $url;
+}

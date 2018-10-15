@@ -28,11 +28,11 @@ class LoginController extends Controller {
         $request = $request->all();
         
         
-        /*if(!isset($request['_token']) && !CSRFToken::compare($request['_token'])) {
+        if(!isset($request['_token']) && !CSRFToken::compare($request['_token'])) {
         
             throw new \Exception("invalid token");
             return ;
-        }*/
+        }
         
         
         $validator = new Validation();
