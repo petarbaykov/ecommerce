@@ -20,11 +20,12 @@ use Ecommerce\Models\Categories;
 class AdminController extends Controller {
     
     private $CategoryModel = null;
-    
+    public $config = null;
     public function __construct() {
         $this->auth();
         $this->admin();
         $this->CategoryModel = new Categories();
+        $this->config = require('config/config.php');
     }
     
     public function index () {
@@ -59,14 +60,16 @@ class AdminController extends Controller {
             if($req->hasFile('image')){
                
                 $path = $req->file('image')['name'];
+                $tmp = $req->file('image')['tmp_name'];
                 $ext = pathinfo($path,PATHINFO_EXTENSION);
                 
-                $destination = __DIR__."../assets/product_images/".$path;
+                $destination = realpath(__DIR__ . '../../assets/product_images/').DIRECTORY_SEPARATOR.$path;
                
                 if($ext == "jpg" || $ext == "png"){
-                    move_uploaded_file($path, $destination);
+                    
+                    move_uploaded_file($tmp, $destination);
                 }
-                exit;
+               $request['image'] = $path;
             }
             $product->insert($request); 
             Session::set('admin-msg',trans('admin.addMsg'));

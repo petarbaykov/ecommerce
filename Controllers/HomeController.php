@@ -11,7 +11,7 @@ use Ecommerce\Controllers\Controller;
 use Ecommerce\App\DB;
 use Ecommerce\Models\Products;
 use Ecommerce\App\Request;
-
+use Ecommerce\Models\Categories;
 class HomeController extends Controller {
     
     function __construct() {
@@ -29,9 +29,10 @@ class HomeController extends Controller {
        
        $one = $products->find(1);
        
-       var_dump($one);
        
-       return $this->view("home/home",["data" =>"5"]);
+       $categoriesModel = new Categories();
+       $categories = $categoriesModel->all();
+       return $this->view("home/home",["categories" =>$categories]);
        
     }
     

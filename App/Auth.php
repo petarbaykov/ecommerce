@@ -11,6 +11,9 @@ namespace Ecommerce\App;
 use Ecommerce\Models\User;
 use Ecommerce\App\Session;
 
+/**
+ * Class for the base Auth
+ */
 class Auth {
     
     
