@@ -10,6 +10,8 @@ namespace Ecommerce\App;
 
 class Validation {
     
+ 
+    
     public $data = [];
     
     public $validation_rules = [ "required" ,"email", "min", "max"];
